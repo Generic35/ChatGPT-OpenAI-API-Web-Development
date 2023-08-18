@@ -36,11 +36,12 @@ app.post('/api/general', async (req, res) => {
   const body = req.body;
   const completion = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
+    temperature: 0,
     messages: [{ role: "user", content: body.prompt }],
   });
 
   // console.log(completion.choices[0]);
-  return res.json(completion.data.choices[0].message);
+  return res.json(completion.data.choices[0].message.content);
 });
 
 app.post('/api/image', async (req, res) => {
